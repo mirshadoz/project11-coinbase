@@ -1,14 +1,58 @@
 <html>
   <head>
     <title>Project11: Coinbase API Dashboard</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <style rel="stylesheet">
-      h1 {
-        color: aqua;
-      }
-    </style>
-    <h1>Hello Project 11: Coinbase API</h1>
-    
+    <header class="header">
+      <h1>CoinDB</h1>
+      <nav class="nav">
+        <input type="text" />
+        <div class="dropdown">
+          <button class="dropbtn">Filter</button>
+          <div class="dropdown-content">
+            <a href="#">All</a>
+            <a href="#">Favourite</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="main">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Volume</th>
+            <th>% Change</th>
+            <th>Market Cap</th>
+            <th>Favourite</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bitcoin</td>
+            <td>BTC</td>
+            <td>$50,000</td>
+            <td>$9465965</td>
+            <td>-2.1%</td>
+            <td>$432,345,545</td>
+            <td><3</td>
+          </tr>
+          <tr>
+            <td>Bitcoin</td>
+            <td>BTC</td>
+            <td>$50,000</td>
+            <td>$9465965</td>
+            <td>-2.1%</td>
+            <td>$432,345,545</td>
+            <td><3</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <script src="script.js"></script>
   </body>
 </html>
