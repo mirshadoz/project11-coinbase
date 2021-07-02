@@ -8,7 +8,10 @@
     <header class="header">
       <h1>CoinDB</h1>
       <nav class="nav">
-        <input type="text" />
+        <form class="search">
+          <input id="searchTxt" type="text" />
+          <button id="searchBtn" class="searchBtn"><span class="iconify" data-icon="bx:bx-search-alt-2" data-inline="false"></span></button>
+        </form>
         <div class="dropdown">
           <button class="dropbtn">Filter</button>
           <div class="dropdown-content">
@@ -19,21 +22,43 @@
       </nav>
     </header>
     <main class="main">
+      <div class="searched-coins">
+        <h3>Results of your search</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Symbol</th>
+              <th>Price</th>
+              <th>Volume</th>
+              <th>% Change</th>
+              <th>Market Cap</th>
+              <th>Favourite</th>
+            </tr>
+          </thead>
+          <tbody id="searched_cryptos_table">
+            
+          </tbody>
+        </table>
+      </div>
       <table>
         <thead>
           <tr>
             <th>Name</th>
             <th>Symbol</th>
             <th>Price</th>
-            <th>Volume 1Day</th>
-            <th>Volume 1Mth</th>
+            <th>Volume</th>
+            <th>% Change</th>
+            <th>Market Cap</th>
             <th>Favourite</th>
           </tr>
         </thead>
-        <tbody id="cryptos_table"></tbody>
+        <tbody id="cryptos_table">
+          
+        </tbody>
       </table>
     </main>
-    <!-- <script src="script.js"></script> -->
-    <script src="test.js"></script>
+    <script src="script.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
   </body>
 </html>

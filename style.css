@@ -30,11 +30,33 @@
   HEADER - NAV - input
 **********/
 
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 input {
   width: 500px;
   height: 40px;
-  margin-right: 20px;
   border-radius: 4px;
+  margin-right: 5px;
+}
+
+.searchBtn {
+  width: 30px;
+  height: 40px;
+  margin-right: 20px;
+  background-color: rgb(58, 139, 214);
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.iconify {
+  color: white;
+  width: 20px;
+  height: 30px;
 }
 
 /**********
@@ -102,4 +124,13 @@ th {
 
 td {
   border-bottom: 1px solid rgb(212, 212, 212);
+}
+
+.searched-coins {
+  display: none;
+}
+
+.searched-coins > h3 {
+  text-align: center;
+  margin: 30px 0px auto;
 }
