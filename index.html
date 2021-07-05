@@ -5,63 +5,56 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <header class="header">
-      <h1>CoinDB</h1>
-      <nav class="nav">
-        <form class="search">
-          <input id="searchTxt" type="text" />
-          <button id="searchBtn" class="searchBtn"><span class="iconify" data-icon="bx:bx-search-alt-2" data-inline="false"></span></button>
-        </form>
-        <div class="dropdown">
-          <button class="dropbtn">Filter</button>
-          <div class="dropdown-content">
-            <a href="#">All</a>
-            <a href="#">Favourite</a>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <div class="chart-main">
-      <h2>Cryptocurrency Chart</h2>
-      <div class="chart">
-        <canvas id="canvas">Crypto coins chart</canvas>
-      </div>
-    </div>
-    <main class="main">
+    <header class="header_container">
+      <section class="header">
+        <h1>CoinDB</h1>
+        <nav class="nav">
+          <form class="search">
+            <input id="searchTxt" type="text" placeholder="Search by name..." />
+            <button id="searchBtn" class="searchBtn">
+              <span
+                class="iconify"
+                data-icon="bx:bx-search-alt-2"
+                data-inline="false"
+              ></span>
+            </button>
+          </form>
+        </nav>
+      </section>
       <div class="searched-coins">
-        <h3>Results of your search</h3>
         <table>
           <thead>
             <tr>
               <th>Name</th>
               <th>Symbol</th>
               <th>Price</th>
-              <th>Volume</th>
-              <th>% Change</th>
-              <th>Market Cap</th>
-              <th>Favourite</th>
+              <th>Volume 1Day</th>
+              <th>Volume 1Month</th>
             </tr>
           </thead>
-          <tbody id="searched_cryptos_table">
-            
-          </tbody>
+          <tbody id="searched_cryptos_table"></tbody>
         </table>
       </div>
+    </header>
+    <section class="chart-main">
+      <h3>Cryptocurrency Chart</h3>
+      <div class="chart">
+        <canvas id="canvas">Crypto coins chart</canvas>
+      </div>
+    </section>
+    <main class="main">
+      <h3>Top 5 Crypto currency by Price</h3>
       <table>
         <thead>
           <tr>
             <th>Name</th>
             <th>Symbol</th>
             <th>Price</th>
-            <th>Volume</th>
-            <th>% Change</th>
-            <th>Market Cap</th>
-            <th>Favourite</th>
+            <th>Volume 1Day</th>
+            <th>Volume 1Month</th>
           </tr>
         </thead>
-        <tbody id="cryptos_table">
-          
-        </tbody>
+        <tbody id="cryptos_table"></tbody>
       </table>
     </main>
     <script src="script.js"></script>
