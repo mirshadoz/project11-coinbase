@@ -1,29 +1,36 @@
-// test by su
-const API_KEY = '568ED056-CB1F-4F76-B357-80A2600EF0BF';
+const API_KEY = 'E78E5484-B0A5-4470-B125-974DB11B9F8E';
 let url = 'https://rest.coinapi.io/v1';
 let table = document.querySelector('#cryptos_table');
+let input = document.querySelector('#searchTxt');
 // keeps a mapping so we can use a coins name to get it's asset_id
-let crypto_to_name_map = []
+let crypto_to_name_map = [];
 
 const get_data = async () => {
   const response = await fetch(url + '/assets?apikey=' + API_KEY);
   response.json().then((data) => {
-    let filtered_data = data
-      .filter((coin) => coin.type_is_crypto && coin.price_usd && coin.name)
-      // populate this on loading for when someone tries to search a coin later
-      crypto_to_name_map = filtered_data.map((coin) => ({name: coin.name, asset_id: coin.asset_id}))
-      filtered_data = filtered_data.sort((a, b) => b.price_usd - a.price_usd)
-                                   .slice(0, 5);
+    let filtered_data = data.filter((coin) => coin.type_is_crypto);
+
+    // populate this on loading for when someone tries to search a coin later
+    crypto_to_name_map = filtered_data.map((coin) => ({
+      name: coin.name,
+      asset_id: coin.asset_id,
+    }));
+    filtered_data = filtered_data
+      .sort((a, b) => b.price_usd - a.price_usd)
+      .slice(0, 5);
+
     render_data(filtered_data);
   });
 };
 
-const render_data = (data, searched_crypto=null) => {
+const render_data = (data, searched_crypto = null) => {
   // If the person did a search we want to populate the hidden table and make it appear
+
   if (searched_crypto) {
     table = document.getElementById('searched_cryptos_table');
+    table.innerHTML = '';
     const search_table = document.querySelector('.searched-coins');
-    search_table.style.display = "block";
+    search_table.style.display = 'block';
   }
   data.forEach((coin) => {
     let tr = document.createElement('tr');
@@ -37,40 +44,43 @@ const render_data = (data, searched_crypto=null) => {
     td3.innerText = `$ ${coin.price_usd.toFixed(3)}`;
 
     let td4 = document.createElement('td');
-    td4.innerText = coin.volume_1day_usd;
+    td4.innerText = `$ ${coin.volume_1day_usd}`;
 
     let td5 = document.createElement('td');
-    td5.innerText = coin.volume_1mth_usd;
+    td5.innerText = `$ ${coin.volume_1mth_usd}`;
 
-    let td6 = document.createElement('td');
-    td5.innerText = "NOT AVAILABLE";
-
-    let td7 = document.createElement('td');
-    td5.innerText = "<3";
-
-    tr.append(td1, td2, td3, td4, td5, td6, td7);
+    tr.append(td1, td2, td3, td4, td5);
 
     table.append(tr);
-    
   });
 };
 
 const get_coin = async (asset_id) => {
   const response = await fetch(`${url}/assets/${asset_id}?apikey=` + API_KEY);
 
-  const data =  await response.json()
-  return data
-}
+  const data = await response.json();
+  // console.log(data);
+  return data;
+};
 
 const searchCoin = async (e) => {
-  e.preventDefault()
+  e.preventDefault();
   // Get coin to search for from text field
-  const search_term = document.getElementById("searchTxt").value;
-  let asset_id = crypto_to_name_map.find(coin => coin.name.toLowerCase() === search_term.toLowerCase()).asset_id
-  const received_coin = await get_coin(asset_id)
-  render_data(received_coin, searched_crypto=true)
-}
+  const search_term = input.value;
+  let asset_id = crypto_to_name_map.find(
+    (coin) => coin.name.toLowerCase() === search_term.toLowerCase(),
+  ).asset_id;
+  const received_coin = await get_coin(asset_id);
+  // console.log(received_coin);
+  render_data(received_coin, (searched_crypto = true));
+  input.value = '';
+};
 
 get_data();
 
-document.getElementById('searchBtn').addEventListener("click", searchCoin)
+// to call it every 5 seconds but api won't allow
+// setInterval(function () {
+//   get_data();
+// }, 5000);
+
+document.getElementById('searchBtn').addEventListener('click', searchCoin);
