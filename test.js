@@ -1,4 +1,3 @@
-// test by su
 const API_KEY = 'E78E5484-B0A5-4470-B125-974DB11B9F8E';
 let url = 'https://rest.coinapi.io/v1';
 let table = document.querySelector('#cryptos_table');
