@@ -21,29 +21,17 @@
           </form>
         </nav>
       </section>
-      <div class="searched-coins">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Symbol</th>
-              <th>Price</th>
-              <th>Volume 1Day</th>
-              <th>Volume 1Month</th>
-            </tr>
-          </thead>
-          <tbody id="searched_cryptos_table"></tbody>
-        </table>
-      </div>
+      <section class="searched-crypto"></section>
     </header>
-    <section class="chart-main">
-      <h3>Cryptocurrency Chart</h3>
-      <div class="chart">
-        <canvas id="canvas">Crypto coins chart</canvas>
-      </div>
-    </section>
     <main class="main">
-      <h3>Top 5 Crypto currency by Price</h3>
+      <button id="chart_btn" onclick="show_graph()">Show Graph</button>
+      <section class="chart-main">
+        <h3>Cryptocurrency Chart</h3>
+        <div class="chart">
+          <canvas id="canvas">Crypto coins chart</canvas>
+        </div>
+      </section>
+      <h3 class="top_5_header">Top 5 Crypto Currencies by Price</h3>
       <table>
         <thead>
           <tr>
