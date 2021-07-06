@@ -1,4 +1,4 @@
-const API_KEY = '90BC9695-397B-4C36-ADC5-1B145E732BDC';
+const API_KEY = '568ED056-CB1F-4F76-B357-80A2600EF0BF';
 let url = 'https://rest.coinapi.io/v1';
 let icons_url = 'https://rest.coinapi.io/v1/assets/icons/{14px}';
 let table = document.querySelector('#cryptos_table');
@@ -17,35 +17,53 @@ let crypto_to_name_map = [];
 //   });
 // };
 
+const get_icons = async (coins) => {
+  const icons_response = await fetch(`${icons_url}?apikey=` + API_KEY);
+  const icons_data = await icons_response.json();
+  let coins_with_icons = coins.map(coin => {
+    let icon_url = icons_data.find(i => i.asset_id === coin.asset_id).url
+    coin.icon_url = icon_url
+    return coin
+  })
+
+  return coins_with_icons
+}
+
 const get_data = async () => {
   const response = await fetch(url + '/assets?apikey=' + API_KEY);
-  response.json().then((data) => {
+  response.json().then( async (data) => {
     let filtered_data = data
       .filter((coin) => coin.type_is_crypto)
-      .sort((a, b) => b.price_usd - a.price_usd);
+      .sort((a, b) => b.price_usd - a.price_usd)
+      .slice(0, 5);
 
     crypto_to_name_map = filtered_data.map((coin) => ({
       name: coin.name,
       asset_id: coin.asset_id,
     }));
 
-    render_data(filtered_data);
+    let filtered_data_with_icons = await get_icons(filtered_data)
+
+    render_data(filtered_data_with_icons);
   });
 };
 
 const render_data = (data) => {
-  data.slice(0, 5).forEach((coin) => {
+  data.forEach((coin) => {
     let tr = document.createElement('tr');
     // let td0 = document.createElement('td');
-    // let img = document.createElement('img');
-    // img.src = get_icon(coin.asset_id);
-    // td0.innerHtml += img;
+    let img = document.createElement('img');
+    img.src = coin.icon_url;
+    // td0.appendChild(img);
+    // console.log('td0', td0);
 
     let td1 = document.createElement('td');
     td1.innerText = coin.name;
 
     let td2 = document.createElement('td');
-    td2.innerText = coin.asset_id;
+    td2.appendChild(img);
+    const coin_asset_id = document.createTextNode(coin.asset_id);
+    td2.appendChild(coin_asset_id);
 
     let td3 = document.createElement('td');
     td3.innerText = `$ ${coin.price_usd.toLocaleString()}`;
@@ -133,3 +151,4 @@ const show_graph = () => {
 };
 
 get_data();
+// get_icons()
